@@ -3,13 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Slideshow</title>
+  <title>Responsive Image Slideshow</title>
   <style>
+    /* Global styles */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* Prevent scrolling */
+    }
+
     /* Slideshow container */
     .slideshow-container {
       position: relative;
       width: 100%;
-      height: 100vh; /* 100% height of the viewport */
+      height: 100%; /* Full height of the frame */
       overflow: hidden;
     }
 
@@ -22,9 +30,10 @@
     /* Image styling */
     .mySlides img {
       vertical-align: middle;
-      height: 100%;
       width: 100%;
-      object-fit: cover;
+      height: 100%;
+      object-fit: cover; /* Ensures the image covers the container */
+      display: block;
     }
 
     /* Fading animation */
@@ -64,29 +73,45 @@
     .prev:hover, .next:hover {
       background-color: rgba(0,0,0,0.8);
     }
+
+    /* Responsive adjustments for mobile */
+    @media only screen and (max-width: 768px) {
+      .prev, .next {
+        font-size: 14px;
+        padding: 12px;
+      }
+
+      .slideshow-container {
+        height: 100vh; /* Full height of the viewport on mobile */
+      }
+
+      .mySlides img {
+        object-fit: contain; /* Ensure image fits within the container on mobile */
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="slideshow-container">
     <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/amontillado_tradicion_vors_30.png?v=1723527848" alt="Image 1">
+      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/amontillado_tradicion_vors_30.png" alt="Image 1">
     </div>
 
     <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/BajelPirataMonastrell.png?v=1723527564" alt="Image 2">
+      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/Cuvee_Lone_Blanc_2023.png" alt="Image 2">
     </div>
 
     <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/Pegau_Cotes_du_rhone.png?v=1723526258" alt="Image 3">
+      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/amontillado_tradicion_vors_30.png" alt="Image 3">
     </div>
 
     <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/la_mauvaise_reputation_malbec.png?v=1723428972" alt="Image 4">
+      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/Cuvee_Lone_Blanc_2023.png" alt="Image 4">
     </div>
 
     <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/BAF_Pommard.png?v=1723190391" alt="Image 5">
+      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/amontillado_tradicion_vors_30.png" alt="Image 5">
     </div>
 
     <!-- Navigation arrows -->
@@ -118,4 +143,3 @@
 
 </body>
 </html>
-
