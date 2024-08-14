@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carousel Image Slideshow</title>
+  <title>One-by-One Carousel Slideshow</title>
   <style>
     /* Global styles */
     html, body {
@@ -27,43 +27,30 @@
     /* Carousel track */
     .carousel-track {
       display: flex;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.5s ease-in-out;
+      transition: transform 0.8s ease-in-out; /* Smooth transition */
     }
 
     /* Individual slides */
     .carousel-slide {
       flex: 0 0 auto;
+      width: 100%; /* Each slide takes full width of the container */
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: transform 0.5s ease-in-out;
     }
 
     /* Image styling */
     .carousel-slide img {
-      width: 80%;
-      height: 80%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    /* Enlarged center image */
-    .carousel-slide.center img {
-      transform: scale(1.2);
     }
 
     /* Responsive adjustments for mobile */
     @media only screen and (max-width: 768px) {
       .carousel-slide img {
-        width: 90%;
-        height: 90%;
-      }
-
-      .carousel-slide.center img {
-        transform: scale(1.1);
+        object-fit: contain; /* Adjust to fit within the container on mobile */
       }
     }
   </style>
@@ -78,7 +65,7 @@
       <div class="carousel-slide">
         <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/clos_henri.png?v=1723599379" alt="Image 2">
       </div>
-      <div class="carousel-slide center">
+      <div class="carousel-slide">
         <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/chilensis.png?v=1723599379" alt="Image 3">
       </div>
       <div class="carousel-slide">
@@ -91,19 +78,13 @@
   </div>
 
   <script>
-    let currentIndex = 2; // Start with the center image
+    let currentIndex = 0;
     const slides = document.querySelectorAll('.carousel-slide');
     const track = document.querySelector('.carousel-track');
 
     function moveSlides() {
       // Move the track to show the next image
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-      // Reset scale for all images
-      slides.forEach(slide => slide.classList.remove('center'));
-
-      // Set the center class to the current image
-      slides[currentIndex].classList.add('center');
 
       // Move to the next image, and loop back to the start
       currentIndex = (currentIndex + 1) % slides.length;
