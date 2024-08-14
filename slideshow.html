@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Image Slideshow</title>
+  <title>Carousel Image Slideshow</title>
   <style>
     /* Global styles */
     html, body {
@@ -19,74 +19,51 @@
       width: 100%;
       height: 100%; /* Full height of the frame */
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Hide the images by default */
-    .mySlides {
-      display: none;
+    /* Carousel track */
+    .carousel-track {
+      display: flex;
+      width: 100%;
       height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    /* Individual slides */
+    .carousel-slide {
+      flex: 0 0 auto;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.5s ease-in-out;
     }
 
     /* Image styling */
-    .mySlides img {
-      vertical-align: middle;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensures the image covers the container */
-      display: block;
+    .carousel-slide img {
+      width: 80%;
+      height: 80%;
+      object-fit: cover;
+      transition: transform 0.5s ease-in-out;
     }
 
-    /* Fading animation */
-    .fade {
-      animation-name: fade;
-      animation-duration: 1.5s;
-    }
-
-    @keyframes fade {
-      from {opacity: .4}
-      to {opacity: 1}
-    }
-
-    /* Next & previous buttons */
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 16px;
-      margin-top: -22px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-    }
-
-    /* Position the "next button" to the right */
-    .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
-
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover, .next:hover {
-      background-color: rgba(0,0,0,0.8);
+    /* Enlarged center image */
+    .carousel-slide.center img {
+      transform: scale(1.2);
     }
 
     /* Responsive adjustments for mobile */
     @media only screen and (max-width: 768px) {
-      .prev, .next {
-        font-size: 14px;
-        padding: 12px;
+      .carousel-slide img {
+        width: 90%;
+        height: 90%;
       }
 
-      .slideshow-container {
-        height: 100vh; /* Full height of the viewport on mobile */
-      }
-
-      .mySlides img {
-        object-fit: contain; /* Ensure image fits within the container on mobile */
+      .carousel-slide.center img {
+        transform: scale(1.1);
       }
     }
   </style>
@@ -94,51 +71,45 @@
 <body>
 
   <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/amontillado_tradicion_vors_30.png" alt="Image 1">
+    <div class="carousel-track">
+      <div class="carousel-slide">
+        <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pasqua_rose_nine_in_the_morning_black_label.png?v=1723599379" alt="Image 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/clos_henri.png?v=1723599379" alt="Image 2">
+      </div>
+      <div class="carousel-slide center">
+        <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/chilensis.png?v=1723599379" alt="Image 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/bouchard.png?v=1723599379" alt="Image 4">
+      </div>
+      <div class="carousel-slide">
+        <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pago_de_los.png?v=1723599379" alt="Image 5">
+      </div>
     </div>
-
-    <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/Cuvee_Lone_Blanc_2023.png" alt="Image 2">
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/amontillado_tradicion_vors_30.png" alt="Image 3">
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/Cuvee_Lone_Blanc_2023.png" alt="Image 4">
-    </div>
-
-    <div class="mySlides fade">
-      <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/amontillado_tradicion_vors_30.png" alt="Image 5">
-    </div>
-
-    <!-- Navigation arrows -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
   </div>
 
   <script>
-    let slideIndex = 0;
-    showSlides();
+    let currentIndex = 2; // Start with the center image
+    const slides = document.querySelectorAll('.carousel-slide');
+    const track = document.querySelector('.carousel-track');
 
-    function showSlides() {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
-      }
-      slideIndex++;
-      if (slideIndex > slides.length) {slideIndex = 1}    
-      slides[slideIndex-1].style.display = "block";  
-      setTimeout(showSlides, 3000); // Change image every 3 seconds
+    function moveSlides() {
+      // Move the track to show the next image
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      // Reset scale for all images
+      slides.forEach(slide => slide.classList.remove('center'));
+
+      // Set the center class to the current image
+      slides[currentIndex].classList.add('center');
+
+      // Move to the next image, and loop back to the start
+      currentIndex = (currentIndex + 1) % slides.length;
     }
 
-    function plusSlides(n) {
-      slideIndex += n - 1;
-      showSlides();
-    }
+    setInterval(moveSlides, 3000); // Change image every 3 seconds
   </script>
 
 </body>
