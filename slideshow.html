@@ -12,25 +12,25 @@
         }
 
         .gallery-container {
-            column-count: 5;
-            column-gap: 10px;
-            max-width: 1200px;
-            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            max-width: 100%;
+            overflow: hidden;
+            padding: 10px;
         }
 
         .gallery-item {
-            position: relative;
+            flex: 1;
+            margin: 0 5px;
             overflow: hidden;
-            margin-bottom: 10px;
             cursor: pointer;
             transition: transform 0.3s ease;
-            display: inline-block;
-            width: 100%;
         }
 
         .gallery-item img {
             width: 100%;
             transition: transform 0.3s ease;
+            display: block;
         }
 
         .gallery-item:hover img {
@@ -39,16 +39,15 @@
 
         @media screen and (max-width: 768px) {
             .gallery-container {
-                column-count: 1;
-                max-width: 100%;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
             }
 
             .gallery-item {
-                margin-bottom: 20px;
-            }
-
-            .gallery-item img {
+                margin: 0 2px;
+                flex: none;
                 width: 100%;
+                display: none;
             }
         }
 
@@ -85,16 +84,11 @@
 <body>
 
 <div class="gallery-container">
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pasqua_rose_nine_in_the_morning_black_label.png" alt="Image 1"></div>
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/clos_henri.png" alt="Image 2"></div>
+    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pago_de_los.png" alt="Image 1"></div>
+    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/bouchard.png" alt="Image 2"></div>
     <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/chilensis.png" alt="Image 3"></div>
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/bouchard.png" alt="Image 4"></div>
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pago_de_los.png" alt="Image 5"></div>
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pasqua_rose_nine_in_the_morning_black_label.png" alt="Image 6"></div>
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/clos_henri.png" alt="Image 7"></div>
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/chilensis.png" alt="Image 8"></div>
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/bouchard.png" alt="Image 9"></div>
-    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pago_de_los.png" alt="Image 10"></div>
+    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/clos_henri.png" alt="Image 4"></div>
+    <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pasqua_rose_nine_in_the_morning_black_label.png" alt="Image 5"></div>
 </div>
 
 <div class="mobile-nav">
@@ -131,7 +125,10 @@
 
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
-            galleryItems.forEach(item => item.style.display = 'inline-block');
+            galleryItems.forEach(item => {
+                item.style.display = 'block';
+                item.style.flex = '1';
+            });
         } else {
             showImage(currentIndex);
         }
