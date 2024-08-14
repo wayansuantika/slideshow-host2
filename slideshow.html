@@ -16,7 +16,6 @@
     /* Gallery container */
     .gallery-container {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       overflow: hidden;
@@ -30,6 +29,7 @@
       display: flex;
       transition: transform 0.8s ease-in-out;
       align-items: center;
+      justify-content: center;
     }
 
     /* Individual images */
@@ -117,23 +117,23 @@
     <div class="gallery-track">
       <div class="gallery-item">
         <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pasqua_rose_nine_in_the_morning_black_label.png?v=1723599379" alt="Image 1">
-        <div class="gallery-title">Title 1</div>
+        <div class="gallery-title">ITALY</div>
       </div>
       <div class="gallery-item">
         <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/clos_henri.png?v=1723599379" alt="Image 2">
-        <div class="gallery-title">Title 2</div>
+        <div class="gallery-title">NEW ZEALAND</div>
       </div>
       <div class="gallery-item center">
         <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/chilensis.png?v=1723599379" alt="Image 3">
-        <div class="gallery-title">Title 3</div>
+        <div class="gallery-title">CHILE</div>
       </div>
       <div class="gallery-item">
         <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/bouchard.png?v=1723599379" alt="Image 4">
-        <div class="gallery-title">Title 4</div>
+        <div class="gallery-title">FRANCE</div>
       </div>
       <div class="gallery-item">
         <img src="https://cdn.shopify.com/s/files/1/0555/6279/7115/files/pago_de_los.png?v=1723599379" alt="Image 5">
-        <div class="gallery-title">Title 5</div>
+        <div class="gallery-title">SPAIN</div>
       </div>
     </div>
     <div class="next" onclick="moveSlides(1)">&#10095;</div>
@@ -154,7 +154,7 @@
       }
 
       // Move the track to show the next image
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      track.style.transform = `translateX(-${currentIndex * 20}%)`;
 
       // Reset scale for all images
       items.forEach(item => item.classList.remove('center'));
